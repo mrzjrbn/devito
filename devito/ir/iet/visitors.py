@@ -356,6 +356,9 @@ class CGen(Visitor):
         return c.Module(header + includes + cdefs +
                         esigns + [blankline, kernel] + efuncs)
 
+    def visit_Break(self, o):
+        return c.Statement("break")
+
 
 class FindSections(Visitor):
 
