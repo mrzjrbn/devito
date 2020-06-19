@@ -27,10 +27,6 @@ class Differentiable(sympy.Expr, Evaluable):
 
     _state = ('space_order', 'time_order', 'indices')
 
-    @property
-    def _sympify(self):
-        return self
-
     @cached_property
     def _functions(self):
         return frozenset().union(*[i._functions for i in self._args_diff])

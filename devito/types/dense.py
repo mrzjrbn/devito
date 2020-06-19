@@ -1327,7 +1327,7 @@ class TimeFunction(Function):
         i = int(self.time_order / 2) if self.time_order >= 2 else 1
         _t = self.dimensions[self._time_position]
 
-        return self.subs({_t: _t + i * _t.spacing})
+        return self._subs(_t, _t + i * _t.spacing)
 
     @property
     def backward(self):
@@ -1335,7 +1335,7 @@ class TimeFunction(Function):
         i = int(self.time_order / 2) if self.time_order >= 2 else 1
         _t = self.dimensions[self._time_position]
 
-        return self.subs({_t: _t - i * _t.spacing})
+        return self._subs(_t, _t - i * _t.spacing)
 
     @property
     def _time_size(self):

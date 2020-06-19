@@ -773,12 +773,18 @@ class AbstractFunction(sympy.Function, Basic, Cached, Pickable, Evaluable):
     def _subs(self, old, new, **hints):
         if old is self:
             return new
+        if old is new:
+            return self
         args = list(self.args)
+        new_args = False
         for i, arg in enumerate(args):
             try:
                 args[i] = arg._subs(old, new, **hints)
+                new_args |= not (args[i] is self.args[i])
             except AttributeError:
                 continue
+        if not new_args:
+            return self
         return self.func(*args)
 
     @property
